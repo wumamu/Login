@@ -30,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
         button_logout =(Button)findViewById(R.id.bt_logout);
         user = FirebaseAuth.getInstance().getCurrentUser();
 //        reference = FirebaseDatabase.get
-        userID = user.getUid();
+//        userID = user.getUid();
 
         textView.setText("Hello, " + user.getEmail());
         button_change_password.setOnClickListener(new View.OnClickListener() {

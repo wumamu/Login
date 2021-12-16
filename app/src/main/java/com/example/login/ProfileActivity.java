@@ -1,23 +1,24 @@
 package com.example.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class ProfileActivity extends AppCompatActivity {
     Button button_change_password, button_logout;
     TextView textView;
     FirebaseUser user;
 //    DatabaseReference reference;
-    String userID;
+//    String userID;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,23 +33,19 @@ public class ProfileActivity extends AppCompatActivity {
 //        reference = FirebaseDatabase.get
 //        userID = user.getUid();
 
-        textView.setText("Hello, " + user.getEmail());
-        button_change_password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
+        if (user != null) {
+            textView.setText("Hello, " + user.getEmail());
+        }
+        button_change_password.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
 
-                Intent i = new Intent(getApplicationContext(), ChangePassword.class);
-                startActivity(i);
-            }
+            Intent i = new Intent(getApplicationContext(), ChangePassword.class);
+            startActivity(i);
         });
-        button_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(ProfileActivity.this, Login.class));
-            }
+        button_logout.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(ProfileActivity.this, Login.class));
         });
     }
 }

@@ -3,21 +3,20 @@ package com.example.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.View;
+//import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+//import com.google.android.gms.tasks.OnCompleteListener;
+//import com.google.android.gms.tasks.Task;
+//import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import androidx.annotation.NonNull;
+//import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Login extends AppCompatActivity {
-    private Button button;
     private EditText useremail, password;
     private FirebaseAuth mAuth;
 //    private ProgressBar progressBar;
@@ -28,17 +27,14 @@ public class Login extends AppCompatActivity {
         if (getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
-        button=(Button)findViewById(R.id.bt_login);
+        Button button = (Button) findViewById(R.id.bt_login);
 //        button.setOnClickListener(this);
         useremail = (EditText)findViewById(R.id.et_username);
         password = (EditText)findViewById(R.id.et_password);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                user_login();
-            }
+        button.setOnClickListener(v -> {
+            // TODO Auto-generated method stub
+            user_login();
         });
 
         mAuth = FirebaseAuth.getInstance();
@@ -68,15 +64,12 @@ public class Login extends AppCompatActivity {
 //            password.requestFocus();
 //            return;
 //        }
-        mAuth.signInWithEmailAndPassword(string_useremail, string_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+        mAuth.signInWithEmailAndPassword(string_useremail, string_password).addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
 //                    Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
-                    startActivity(new Intent(Login.this, ProfileActivity.class));
-                } else {
-                    Toast.makeText(Login.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
-                }
+                startActivity(new Intent(Login.this, ProfileActivity.class));
+            } else {
+                Toast.makeText(Login.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
             }
         });
     }
